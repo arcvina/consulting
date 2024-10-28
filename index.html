@@ -4,73 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzeria Case Study</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        .screen {
-            display: none;
-        }
-
-        .active {
-            display: block;
-        }
-
-        .buttons {
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .prev {
-            background-color: #6c757d;
-        }
-
-        .prev:hover {
-            background-color: #565e64;
-        }
-
-        .input-field {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            min-width: 120px;
-        }
-
-        .formula-section {
-            margin: 20px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -80,7 +14,7 @@
         <!-- Screen 1: Introduction -->
         <div id="screen1" class="screen active">
             <h2>Introduction</h2>
-            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is thinking about buying a second oven to increase her capacity.</p>
+            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is considering buying a second oven to increase her capacity.</p>
             <div class="buttons">
                 <button onclick="nextScreen(1.5)">Start</button>
             </div>
@@ -88,12 +22,8 @@
 
         <!-- Screen 1.5: Data -->
         <div id="screen1.5" class="screen">
-            <h2>Introduction </h2>
-            <p>
-                The second oven cost would cost $25K. At the moment, the average additional pizza pies sold per day is 50, with the average pizza pie price being $20.
-                The Profit margin of the pizza is 20% 
-              
-              </p>
+            <h2>Data Overview</h2>
+            <p>The second oven would cost $25,000. Currently, the average additional pizzas sold per day is 50, with an average price of $20 per pizza. The profit margin on each pizza is 20%.</p>
             <div class="buttons">
                 <button class="prev" onclick="prevScreen(1)">Previous</button>
                 <button onclick="nextScreen(2)">Continue</button>
@@ -102,8 +32,8 @@
 
         <!-- Screen 2: Formula for daily revenue -->
         <div id="screen2" class="screen">
-            <h2>Step 1: Choose the Formula</h2>
-            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
+            <h2>Step 1: Choose the Revenue Formula</h2>
+            <p>To calculate the daily revenue, select the correct variables and operator to complete the formula.</p>
 
             <div class="formula-section">
                 Daily Revenue = 
@@ -131,11 +61,11 @@
 
             <div class="buttons">
                 <button class="prev" onclick="prevScreen(1.5)">Previous</button>
-                <button onclick="checkFormula()">Submit</button>
+                <button onclick="checkRevenueFormula()">Submit</button>
             </div>
         </div>
 
-        <!-- Screen 3: Filling in the calculation -->
+        <!-- Screen 3: Filling in the Calculation -->
         <div id="screen3" class="screen">
             <h2>Step 2: Calculate the Revenue</h2>
             <p>Now that you have the correct formula, enter the values to calculate the revenue.</p>
@@ -150,74 +80,109 @@
 
             <div class="buttons">
                 <button class="prev" onclick="prevScreen(2)">Previous</button>
-                <button onclick="checkCalculation()">Submit</button>
+                <button onclick="checkRevenueCalculation()">Submit</button>
             </div>
         </div>
 
-        <!-- Screen 4: Conclusion -->
-        <div id="screen4" class="screen">
-            <h2>Conclusion</h2>
-            <p>Great! You've calculated the revenue. Now let's move on to further steps to check if the pizzeria should invest in the oven.</p>
+        <!-- Screen 3.1: Introduction to Profit Calculation -->
+        <div id="screen3.1" class="screen">
+            <h2>Calculate Daily Profit</h2>
+            <p>Great! You've calculated the daily revenue. Now, let's calculate the daily profit using the profit margin.</p>
             <div class="buttons">
-                <button class="prev" onclick="prevScreen(3)">Previous</button>
-                <button onclick="nextScreen(1)">Restart</button>
+                <button onclick="nextScreen(3.2)">Start</button>
             </div>
         </div>
 
+        <!-- Screen 3.2: Profit Margin Calculation -->
+        <div id="screen3.2" class="screen">
+            <h2>Step 3: Calculate the Profit</h2>
+            <p>Enter the daily revenue and profit margin to calculate the daily profit.</p>
+            
+            <div class="profit-calculation-section">
+                <input type="number" id="dailyRevenue" placeholder="Enter daily revenue" class="input-field">
+                <span>*</span>
+                <input type="number" id="profitMargin" placeholder="Enter profit margin (e.g., 0.20)" class="input-field">
+                <span>=</span>
+                <input type="number" id="profitResult" placeholder="Enter profit result" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.1)">Previous</button>
+                <button onclick="checkProfitCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3.5: Conclusion for Profit Calculation -->
+        <div id="screen3.5" class="screen">
+            <h2>Daily Profit Calculation Complete</h2>
+            <p>You've successfully calculated the daily profit. Now, let's determine the break-even point for the second oven.</p>
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.2)">Previous</button>
+                <button onclick="nextScreen(4)">Next</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Select Break-Even Formula -->
+        <div id="screen4" class="screen">
+            <h2>Step 4: Choose the Break-Even Formula</h2>
+            <p>Select the correct variables and operator to complete the break-even formula.</p>
+
+            <div class="formula-selection">
+                Break-even = 
+                <select id="breakEvenVar1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="oven_cost">oven cost</option>
+                    <option value="daily_profit">daily profit</option>
+                </select>
+
+                <select id="breakEvenOperator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="breakEvenVar2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="daily_profit">daily profit</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3.5)">Previous</button>
+                <button onclick="checkBreakEvenFormula()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 4.5: Calculate Break-Even Days -->
+        <div id="screen4.5" class="screen">
+            <h2>Step 5: Calculate Break-Even Days</h2>
+            <p>Enter the values to calculate the break-even days.</p>
+
+            <div class="break-even-section">
+                <input type="number" id="breakEvenValue1" placeholder="Enter oven cost" class="input-field">
+                <span id="selectedBreakEvenOperator"></span>
+                <input type="number" id="breakEvenValue2" placeholder="Enter daily profit" class="input-field">
+                <span>=</span>
+                <input type="number" id="breakEvenResult" placeholder="Enter break-even days" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(4)">Previous</button>
+                <button onclick="checkBreakEvenDaysCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Final Conclusion -->
+        <div id="screen5" class="screen">
+            <h2>Conclusion</h2>
+            <p>wip but slay congrats for now you should join cyc</p>
+            <div class="buttons">
+                <button onclick="nextScreen(1)">Restart Case Study</button>
+            </div>
+        </div>
     </div>
 
-    <script>
-        let currentScreen = 1;
-        const correctFormula = {
-            var1: "pizzas_sold", // Using a single variable here
-            operator: "*",
-            var2: "pizza_price"
-        };
-        const correctValues = {
-            pizzas_sold: 50,
-            pizza_price: 20
-        };
-
-        function nextScreen(screen) {
-            document.getElementById(`screen${currentScreen}`).classList.remove('active');
-            currentScreen = screen;
-            document.getElementById(`screen${screen}`).classList.add('active');
-        }
-
-        function prevScreen(screen) {
-            document.getElementById(`screen${currentScreen}`).classList.remove('active');
-            currentScreen = screen;
-            document.getElementById(`screen${screen}`).classList.add('active');
-        }
-
-        function checkFormula() {
-            const selectedVar1 = document.getElementById('var1').value;
-            const selectedOperator = document.getElementById('operator').value;
-            const selectedVar2 = document.getElementById('var2').value;
-
-            if (selectedVar1 === correctFormula.var1 && selectedOperator === correctFormula.operator && selectedVar2 === correctFormula.var2) {
-                alert("Correct formula! Now, let's calculate.");
-                document.getElementById('selectedOperator').innerText = selectedOperator;
-                nextScreen(3);
-            } else {
-                alert("Incorrect formula. Please try again.");
-            }
-        }
-
-        function checkCalculation() {
-            const value1 = parseInt(document.getElementById('value1').value);
-            const value2 = parseInt(document.getElementById('value2').value);
-            const result = parseInt(document.getElementById('revenueResult').value);
-            const correctResult = correctValues.pizzas_sold * correctValues.pizza_price;
-
-            if (value1 === correctValues.pizzas_sold && value2 === correctValues.pizza_price && result === correctResult) {
-                alert("Correct! The daily revenue is " + correctResult);
-                nextScreen(4);
-            } else {
-                alert("Incorrect values or calculation. Try again.");
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>

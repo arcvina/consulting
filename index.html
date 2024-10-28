@@ -62,7 +62,6 @@
             display: inline-block;
             margin: 10px 0;
             padding: 8px;
-            width: auto;
             border: 1px solid #ccc;
             border-radius: 4px;
             min-width: 120px;
@@ -71,7 +70,6 @@
         .formula-section {
             margin: 20px 0;
         }
-
     </style>
 </head>
 <body>
@@ -82,23 +80,23 @@
         <!-- Screen 1: Introduction -->
         <div id="screen1" class="screen active">
             <h2>Introduction</h2>
-            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is thinking about buying a second oven to increase her capacity. </p>
+            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is thinking about buying a second oven to increase her capacity.</p>
             <div class="buttons">
                 <button onclick="nextScreen(1.5)">Start</button>
             </div>
         </div>
 
-
+        <!-- Screen 1.5: Data -->
         <div id="screen1.5" class="screen">
             <h2>Data</h2>
-            <p>Here is the required information </p>
+            <p>Here is the required information.</p>
             <div class="buttons">
                 <button onclick="nextScreen(2)">Continue</button>
                 <button class="prev" onclick="prevScreen(1)">Previous</button>
             </div>
         </div>
 
-        <!-- Screen 2: SFormula for daily revenue-->
+        <!-- Screen 2: Formula for daily revenue -->
         <div id="screen2" class="screen">
             <h2>Step 1: Choose the Formula</h2>
             <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
@@ -152,101 +150,6 @@
             </div>
         </div>
 
- <!-- Screen 2: Formula for daily revenue-->
-        <div id="screen2" class="screen">
-            <h2>Step 1: Choose the Formula</h2>
-            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
-
-            <div class="formula-section">
-                Daily Revenue = 
-                <select id="var1" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="pizzas_sold">pizzas_sold</option>
-                    <option value="pizza_price">pizza price</option>
-                    <option value="oven_cost">oven cost</option>
-                </select>
-
-                <select id="operator" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="*">*</option>
-                    <option value="+">+</option>
-                    <option value="/">/</option>
-                </select>
-
-                <select id="var2" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="pizza_price">pizza price</option>
-                    <option value="additional_pizzas">additional pizzas</option>
-                    <option value="oven_cost">oven cost</option>
-                </select>
-            </div>
-
-            <div class="buttons">
-                <button class="prev" onclick="prevScreen(1)">Previous</button>
-                <button onclick="checkFormula()">Submit</button>
-            </div>
-        </div>
-
-        <!-- Screen 3: Filling in the calculation -->
-        <div id="screen3" class="screen">
-            <h2>Step 2: Calculate the Revenue</h2>
-            <p>Now that you have the correct formula, enter the values to calculate the revenue.</p>
-
-            <div class="formula-section">
-                <input type="number" id="value1" placeholder="Enter value 1" class="input-field">
-                <span id="selectedOperator"></span>
-                <input type="number" id="value2" placeholder="Enter value 2" class="input-field">
-                <span>=</span>
-                <input type="number" id="revenueResult" placeholder="Enter result" class="input-field">
-            </div>
-
-            <div class="buttons">
-                <button class="prev" onclick="prevScreen(2)">Previous</button>
-                <button onclick="checkCalculation()">Submit</button>
-            </div>
-        </div>
-
-        <!-- Screen 4: Formula for profit margin-->
-        <div id="screen5" class="screen">
-            <h2>Step 1: Choose the Formula</h2>
-            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
-
-            <div class="formula-section">
-                Daily Revenue = 
-                <select id="var1" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="additional_pizzas">additional pizzas</option>
-                    <option value="pizza_price">pizza price</option>
-                    <option value="oven_cost">oven cost</option>
-                </select>
-
-                <select id="operator" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="*">*</option>
-                    <option value="+">+</option>
-                    <option value="/">/</option>
-                </select>
-
-                <select id="var2" class="input-field">
-                    <option value="0">Select</option>
-                    <option value="pizza_price">pizza price</option>
-                    <option value="additional_pizzas">additional pizzas</option>
-                    <option value="oven_cost">oven cost</option>
-                </select>
-            </div>
-
-            <div class="buttons">
-                <button class="prev" onclick="prevScreen(1)">Previous</button>
-                <button onclick="checkFormula()">Submit</button>
-            </div>
-        </div>
-
-
-
-
-
-
-
         <!-- Screen 4: Conclusion -->
         <div id="screen4" class="screen">
             <h2>Conclusion</h2>
@@ -262,7 +165,7 @@
     <script>
         let currentScreen = 1;
         const correctFormula = {
-            var1: "pizzas_sold" || "pizzas_price",
+            var1: "pizzas_sold", // Using a single variable here
             operator: "*",
             var2: "pizza_price"
         };

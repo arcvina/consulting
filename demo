@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Case Study</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .prev {
+            background-color: #6c757d;
+        }
+
+        .prev:hover {
+            background-color: #565e64;
+        }
+
+        .input-field {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 8px;
+            width: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-width: 120px;
+        }
+
+        .formula-section {
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pizzeria Case Study</h1>
+
+        <!-- Screen 1: Introduction -->
+        <div id="screen1" class="screen active">
+            <h2>Introduction</h2>
+            <p>Your client is a local pizzeria owner. She notices that around lunchtime, the customer line goes out the door. She is thinking about buying a second oven to increase her capacity. </p>
+            <div class="buttons">
+                <button onclick="nextScreen(1.5)">Start</button>
+            </div>
+        </div>
+
+
+        <div id="screen1.5" class="screen">
+            <h2>Data</h2>
+            <p>Here is the required information </p>
+            <div class="buttons">
+                <button onclick="nextScreen(2)">Continue</button>
+                <button class="prev" onclick="prevScreen(1)">Previous</button>
+            </div>
+        </div>
+
+        <!-- Screen 2: SFormula for daily revenue-->
+        <div id="screen2" class="screen">
+            <h2>Step 1: Choose the Formula</h2>
+            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
+
+            <div class="formula-section">
+                Daily Revenue = 
+                <select id="var1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizzas_sold">pizzas sold</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+
+                <select id="operator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="*">*</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="var2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="pizzas_sold">pizzas sold</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(1.5)">Previous</button>
+                <button onclick="checkFormula()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Filling in the calculation -->
+        <div id="screen3" class="screen">
+            <h2>Step 2: Calculate the Revenue</h2>
+            <p>Now that you have the correct formula, enter the values to calculate the revenue.</p>
+
+            <div class="formula-section">
+                <input type="number" id="value1" placeholder="Enter value 1" class="input-field">
+                <span id="selectedOperator"></span>
+                <input type="number" id="value2" placeholder="Enter value 2" class="input-field">
+                <span>=</span>
+                <input type="number" id="revenueResult" placeholder="Enter result" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(2)">Previous</button>
+                <button onclick="checkCalculation()">Submit</button>
+            </div>
+        </div>
+
+ <!-- Screen 2: Formula for daily revenue-->
+        <div id="screen2" class="screen">
+            <h2>Step 1: Choose the Formula</h2>
+            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
+
+            <div class="formula-section">
+                Daily Revenue = 
+                <select id="var1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizzas_sold">pizzas_sold</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+
+                <select id="operator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="*">*</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="var2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="additional_pizzas">additional pizzas</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(1)">Previous</button>
+                <button onclick="checkFormula()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 3: Filling in the calculation -->
+        <div id="screen3" class="screen">
+            <h2>Step 2: Calculate the Revenue</h2>
+            <p>Now that you have the correct formula, enter the values to calculate the revenue.</p>
+
+            <div class="formula-section">
+                <input type="number" id="value1" placeholder="Enter value 1" class="input-field">
+                <span id="selectedOperator"></span>
+                <input type="number" id="value2" placeholder="Enter value 2" class="input-field">
+                <span>=</span>
+                <input type="number" id="revenueResult" placeholder="Enter result" class="input-field">
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(2)">Previous</button>
+                <button onclick="checkCalculation()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Screen 4: Formula for profit margin-->
+        <div id="screen5" class="screen">
+            <h2>Step 1: Choose the Formula</h2>
+            <p>Let's start by calculating the daily revenue. Choose the correct variables and operator to complete the formula.</p>
+
+            <div class="formula-section">
+                Daily Revenue = 
+                <select id="var1" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="additional_pizzas">additional pizzas</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+
+                <select id="operator" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="*">*</option>
+                    <option value="+">+</option>
+                    <option value="/">/</option>
+                </select>
+
+                <select id="var2" class="input-field">
+                    <option value="0">Select</option>
+                    <option value="pizza_price">pizza price</option>
+                    <option value="additional_pizzas">additional pizzas</option>
+                    <option value="oven_cost">oven cost</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(1)">Previous</button>
+                <button onclick="checkFormula()">Submit</button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- Screen 4: Conclusion -->
+        <div id="screen4" class="screen">
+            <h2>Conclusion</h2>
+            <p>Great! You've calculated the revenue. Now let's move on to further steps to check if the pizzeria should invest in the oven.</p>
+            <div class="buttons">
+                <button class="prev" onclick="prevScreen(3)">Previous</button>
+                <button onclick="nextScreen(1)">Restart</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let currentScreen = 1;
+        const correctFormula = {
+            var1: "pizzas_sold" || "pizzas_price",
+            operator: "*",
+            var2: "pizza_price"
+        };
+        const correctValues = {
+            pizzas_sold: 50,
+            pizza_price: 20
+        };
+
+        function nextScreen(screen) {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = screen;
+            document.getElementById(`screen${screen}`).classList.add('active');
+        }
+
+        function prevScreen(screen) {
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            currentScreen = screen;
+            document.getElementById(`screen${screen}`).classList.add('active');
+        }
+
+        function checkFormula() {
+            const selectedVar1 = document.getElementById('var1').value;
+            const selectedOperator = document.getElementById('operator').value;
+            const selectedVar2 = document.getElementById('var2').value;
+
+            if (selectedVar1 === correctFormula.var1 && selectedOperator === correctFormula.operator && selectedVar2 === correctFormula.var2) {
+                alert("Correct formula! Now, let's calculate.");
+                document.getElementById('selectedOperator').innerText = selectedOperator;
+                nextScreen(3);
+            } else {
+                alert("Incorrect formula. Please try again.");
+            }
+        }
+
+        function checkCalculation() {
+            const value1 = parseInt(document.getElementById('value1').value);
+            const value2 = parseInt(document.getElementById('value2').value);
+            const result = parseInt(document.getElementById('revenueResult').value);
+            const correctResult = correctValues.pizzas_sold * correctValues.pizza_price;
+
+            if (value1 === correctValues.pizzas_sold && value2 === correctValues.pizza_price && result === correctResult) {
+                alert("Correct! The daily revenue is " + correctResult);
+                nextScreen(4);
+            } else {
+                alert("Incorrect values or calculation. Try again.");
+            }
+        }
+    </script>
+
+</body>
+</html>
